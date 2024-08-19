@@ -129,6 +129,17 @@ type CorreOTReceiveSetup struct {
 //
 // This is necessary to marshal the ConfigReceiver struct.
 func (c *CorreOTReceiveSetup) MarshalJSON() ([]byte, error) {
+
+	K0 := make([]string, params.OTParam)
+	for i, bytes := range c._K_0 {
+		K0[i] = base64.StdEncoding.EncodeToString(bytes[:])
+	}
+
+	K1 := make([]string, params.OTParam)
+	for i, bytes := range c._K_1 {
+		K1[i] = base64.StdEncoding.EncodeToString(bytes[:])
+	}
+
 	// Convert byte arrays to base64 strings for JSON compatibility
 	type Alias CorreOTReceiveSetup
 	return json.Marshal(&struct {
@@ -136,8 +147,8 @@ func (c *CorreOTReceiveSetup) MarshalJSON() ([]byte, error) {
 		K1 []string `json:"K_1"`
 		*Alias
 	}{
-		K0:    convertToBase64Strings(c._K_0),
-		K1:    convertToBase64Strings(c._K_1),
+		K0: K0,
+		K1: K1,
 		Alias: (*Alias)(c),
 	})
 }
