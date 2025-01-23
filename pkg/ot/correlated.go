@@ -162,9 +162,9 @@ func (c *CorreOTReceiveSetup) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// MarshalJSON customizes the JSON representation of CorreOTReceiveSetup.
+// MarshalJSON customizes the JSON representation of CorreOTSendSetup.
 //
-// This is necessary to marshal the ConfigReceiver struct.
+// This is necessary to marshal the ConfigSender struct.
 func (c *CorreOTSendSetup) MarshalJSON() ([]byte, error) {
 	// Convert byte arrays to base64 strings for JSON compatibility
 	type Alias CorreOTSendSetup
@@ -179,9 +179,9 @@ func (c *CorreOTSendSetup) MarshalJSON() ([]byte, error) {
 	})
 }
 
-// UnmarshalJSON customizes the JSON unmarshalling of CorreOTReceiveSetup.
+// UnmarshalJSON customizes the JSON unmarshalling of CorreOTSendSetup.
 //
-// This is necessary to unmarshal the ConfigReceiver struct.
+// This is necessary to unmarshal the ConfigSender struct.
 func (c *CorreOTSendSetup) UnmarshalJSON(data []byte) error {
 	type Alias CorreOTSendSetup
 	aux := &struct {
@@ -217,7 +217,6 @@ func convertFromBase64Strings(data []string) [params.OTParam][params.OTBytes]byt
 	return result
 }
 
-// convertToBase64Strings converts a 2D byte array to a slice of base64-encoded strings.
 func convertToBase64String(data [params.OTBytes]byte) string {
 	var result string = base64.StdEncoding.EncodeToString(data[:])
 
